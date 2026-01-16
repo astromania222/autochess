@@ -1510,6 +1510,297 @@
             border: none !important;
             background: rgba(0, 0, 0, 0.2) !important;
         }
+
+        /* ===== RESPONSIVE STYLES ===== */
+        @media (max-width: 1024px) {
+            .board {
+                gap: 3px;
+                padding: 10px;
+                grid-template-columns: repeat(7, 50px);
+            }
+
+            .hex-cell {
+                width: 50px;
+                height: 50px;
+            }
+
+            .unit {
+                width: 44px;
+                height: 44px;
+                font-size: 0.6rem;
+            }
+
+            .slot {
+                width: 50px;
+                height: 50px;
+            }
+
+            #inventory-container {
+                left: 50%;
+                transform: translateX(-50%);
+                top: auto;
+                bottom: 15rem;
+                /* Adjust based on footer height */
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* General Layout */
+            body {
+                overflow-x: hidden;
+            }
+
+            header {
+                padding: 10px;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .header-info {
+                width: 100%;
+                justify-content: space-between;
+                font-size: 0.9rem;
+            }
+
+            .stage-badge,
+            .gold-display,
+            .health-bar {
+                padding: 4px 10px;
+                font-size: 0.9rem;
+            }
+
+            main {
+                padding: 5px;
+                width: 100%;
+            }
+
+            .game-area {
+                width: 100%;
+                padding: 2px;
+                border: none;
+                background: transparent;
+            }
+
+            /* Fluid Board */
+            .board {
+                grid-template-columns: repeat(7, 1fr);
+                width: 100%;
+                max-width: 95vw;
+                gap: 2px;
+                padding: 5px;
+            }
+
+            .hex-cell {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+                /* Keeping it square */
+                border-width: 1px;
+            }
+
+            /* Unit Scaling */
+            .unit {
+                width: 90%;
+                height: 90%;
+                font-size: 0.5rem;
+                border-width: 1px;
+            }
+
+            .unit .unit-bg-icon {
+                font-size: 20px;
+            }
+
+            /* Shop & Bench */
+            footer {
+                padding: 5px;
+            }
+
+            .shop-container {
+                transform: scale(0.85);
+                transform-origin: bottom center;
+                gap: 2px;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                margin-top: 0;
+            }
+
+            .shop-card {
+                width: 100px;
+                padding: 4px;
+            }
+
+            .bench-container {
+                gap: 4px;
+                padding: 5px;
+                margin: 2px 0;
+            }
+
+            .slot {
+                width: 12vw;
+                height: 12vw;
+                max-width: 50px;
+                max-height: 50px;
+            }
+
+            /* Controls */
+            .controls {
+                transform: scale(0.9);
+                gap: 5px;
+            }
+
+            button {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+
+            /* Panels - Hide or Reposition */
+            #synergy-panel {
+                display: none;
+                /* Hide for now on mobile, too cluttered */
+            }
+
+            #bot-synergy-panel {
+                display: none;
+            }
+
+            #item-guide-panel {
+                right: 50%;
+                transform: translateX(50%);
+                top: 60px;
+                width: 90%;
+                height: 50vh;
+                display: none;
+                /* Initially hidden */
+            }
+
+            #inventory-container {
+                width: 90%;
+                left: 50%;
+                transform: translateX(-50%);
+                top: auto;
+                bottom: 220px;
+                /* Above shop area */
+                grid-template-columns: repeat(8, 1fr);
+                gap: 2px;
+                height: auto;
+                padding: 5px;
+                justify-items: center;
+            }
+
+            .inventory-slot {
+                width: 100%;
+                aspect-ratio: 1/1;
+                height: auto;
+            }
+
+            #drop-table-container,
+            #damage-overlay,
+            #augment-list-container {
+                display: none !important;
+                /* Simplify UI for mobile */
+            }
+
+            #synergy-list-container {
+                left: 50%;
+                transform: translateX(-50%);
+                width: 95%;
+                top: 15%;
+            }
+
+            /* Sell Zone */
+            #sell-zone {
+                width: 60px;
+                height: 60px;
+                font-size: 0.7rem;
+                bottom: 15rem;
+            }
+
+            /* Make sure tooltips don't overflow */
+            .unit-tooltip {
+                position: fixed;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                bottom: auto !important;
+                width: 80vw;
+                max-width: 300px;
+                z-index: 9999;
+            }
+        }
+
+        /* Mobile Navigation */
+        #mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #1a1b26;
+            border-top: 1px solid #444;
+            display: none;
+            /* Flex on mobile */
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 9000;
+            padding-bottom: max(10px, env(safe-area-inset-bottom));
+        }
+
+        #mobile-nav button {
+            background: transparent;
+            border: none;
+            color: #888;
+            font-size: 0.7rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        #mobile-nav button.active {
+            color: #ffd700;
+        }
+
+        #mobile-nav button i {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        /* Panel visibility toggles */
+        .mobile-visible {
+            display: block !important;
+            z-index: 8000 !important;
+            animation: fadeIn 0.2s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px) translateX(50%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) translateX(50%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            #mobile-nav {
+                display: flex;
+            }
+
+            /* Adjust Footer to account for nav bar */
+            footer {
+                padding-bottom: 70px;
+            }
+
+            #sell-zone {
+                bottom: 80px;
+            }
+        }
     </style>
 </head>
 
@@ -5695,8 +5986,34 @@
             const oldSz = document.getElementById('sell-zone');
             if (oldSz) oldSz.style.display = 'none';
 
+            // Mobile Navigation Control
+            window.togglePanel = (panelId, btn) => {
+                const p = document.getElementById(panelId);
+                const allPanels = ['synergy-panel', 'item-guide-panel', 'inventory-container'];
+                const isVis = p.classList.contains('mobile-visible');
+
+                // Hide all
+                allPanels.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.classList.remove('mobile-visible');
+                });
+                document.querySelectorAll('#mobile-nav button').forEach(b => b.classList.remove('active'));
+
+                // Toggle target
+                if (!isVis) {
+                    p.classList.add('mobile-visible');
+                    if (btn) btn.classList.add('active');
+                }
+            };
+
             game.start();
         </script>
+        <div id="mobile-nav">
+            <button onclick="togglePanel('synergy-panel', this)"><i class="ra ra-scroll-unfurled"></i>軍勢</button>
+            <button onclick="togglePanel('inventory-container', this)"><i class="ra ra-backpack"></i>荷物</button>
+            <button onclick="togglePanel('item-guide-panel', this)"><i class="ra ra-book"></i>全書</button>
+        </div>
+
 </body>
 
 </html>
