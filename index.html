@@ -1540,7 +1540,30 @@
                 transform: translateX(-50%);
                 top: auto;
                 bottom: 15rem;
-                /* Adjust based on footer height */
+            }
+
+            /* Show mobile navigation on tablets */
+            #mobile-nav {
+                display: flex;
+            }
+
+            /* Hide side panels on tablet, use bottom nav */
+            #synergy-panel,
+            #bot-synergy-panel {
+                display: none;
+            }
+
+            #item-guide-panel {
+                display: none;
+            }
+
+            #synergy-list-container {
+                display: none;
+            }
+
+            /* Adjust footer for mobile nav */
+            footer {
+                padding-bottom: 70px;
             }
         }
 
@@ -1787,18 +1810,260 @@
             }
         }
 
+
         @media (max-width: 768px) {
+
+            /* General Layout - Mobile Mode */
+            body {
+                overflow-x: hidden;
+            }
+
+            header {
+                padding: 10px;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .header-info {
+                width: 100%;
+                justify-content: space-between;
+                font-size: 0.9rem;
+            }
+
+            .stage-badge,
+            .gold-display,
+            .health-bar {
+                padding: 4px 10px;
+                font-size: 0.9rem;
+            }
+
+            main {
+                padding: 5px;
+                width: 100%;
+                /* Add padding bottom to avoid overlap with bottom nav */
+                padding-bottom: 60px;
+            }
+
+            .game-area {
+                width: 100%;
+                padding: 2px;
+                border: none;
+                background: transparent;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            /* Fluid Board */
+            .board {
+                grid-template-columns: repeat(7, 1fr);
+                width: 100%;
+                max-width: min(95vw, 600px);
+                /* Limit width on tablet */
+                gap: 2px;
+                padding: 5px;
+                margin: 0 auto;
+            }
+
+            .hex-cell {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+                border-width: 1px;
+            }
+
+            /* Unit Scaling */
+            .unit {
+                width: 90%;
+                height: 90%;
+                font-size: 0.6rem;
+                border-width: 1px;
+            }
+
+            .unit .unit-bg-icon {
+                font-size: 20px;
+            }
+
+            /* Shop & Bench */
+            footer {
+                padding: 5px;
+                padding-bottom: 70px;
+                /* Space for nav */
+            }
+
+            .shop-container {
+                transform: scale(1);
+                gap: 4px;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                margin-top: 5px;
+                height: auto;
+            }
+
+            .shop-card {
+                width: 18%;
+                /* Fit approx 5 cards */
+                min-width: 60px;
+                max-width: 100px;
+                padding: 4px;
+                font-size: 0.8rem;
+            }
+
+            /* Hide description/traits on small shop cards if needed, for better fit */
+            .shop-card .unit-tooltip {
+                display: none !important;
+                /* Tooltip logic handles click/hover, but simplify CSS hover */
+            }
+
+            .bench-container {
+                width: 100%;
+                justify-content: center;
+                gap: 4px;
+                padding: 5px;
+                margin: 2px 0;
+            }
+
+            .slot {
+                width: 12vw;
+                height: 12vw;
+                max-width: 50px;
+                max-height: 50px;
+            }
+
+            /* Controls */
+            .controls {
+                transform: scale(1);
+                gap: 10px;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            button {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+
+            /* Panels - Hide or Reposition */
+            #synergy-panel,
+            #bot-synergy-panel {
+                display: none;
+            }
+
+            #item-guide-panel {
+                right: 50%;
+                transform: translateX(50%);
+                top: 10%;
+                width: 90%;
+                height: 60vh;
+                display: none;
+                z-index: 9000;
+                background: #1a1b26;
+                /* Solid background */
+                box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+                border: 2px solid #5c4d3c;
+            }
+
+            #inventory-container {
+                width: 90%;
+                left: 50%;
+                transform: translateX(-50%);
+                top: auto;
+                bottom: 250px;
+                grid-template-columns: repeat(8, 1fr);
+                gap: 4px;
+                height: auto;
+                padding: 10px;
+                justify-items: center;
+                display: none;
+                z-index: 9000;
+                background: rgba(26, 27, 38, 0.95);
+            }
+
+            .inventory-slot {
+                width: 100%;
+                aspect-ratio: 1/1;
+                height: auto;
+            }
+
+            #drop-table-container,
+            #augment-list-container {
+                display: none !important;
+            }
+
+            #synergy-list-container {
+                display: none;
+                /* Hide by default on mobile/tablet */
+                position: fixed;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 95%;
+                top: 15%;
+                background: #1a1b26;
+                z-index: 9000;
+                border: 2px solid #5c4d3c;
+                box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            }
+
+            #synergy-list-container.mobile-visible {
+                display: flex !important;
+            }
+
+            /* Sell Zone */
+            #sell-zone {
+                bottom: 80px;
+                width: 70px;
+                height: 70px;
+            }
+
+            /* Tooltips */
+            .unit-tooltip {
+                position: fixed;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                bottom: auto !important;
+                width: 80vw;
+                max-width: 300px;
+                z-index: 10000;
+                background: rgba(30, 30, 40, 0.98);
+            }
+
+            /* Mobile Navigation */
             #mobile-nav {
                 display: flex;
             }
 
-            /* Adjust Footer to account for nav bar */
-            footer {
-                padding-bottom: 70px;
+            /* Panel visibility toggles - Improved visibility */
+            .mobile-visible {
+                display: block !important;
+                /* For inventory - it is grid usually but block is fine for container if styled */
+                display: flex !important;
+                /* Some might need flex */
+                z-index: 9500 !important;
+                animation: fadeIn 0.2s;
             }
 
-            #sell-zone {
-                bottom: 80px;
+            /* Specific fix for Inventory grid when visible */
+            #inventory-container.mobile-visible {
+                display: grid !important;
+            }
+
+            /* Synergy Panel as Mobile Overlay */
+            #synergy-panel.mobile-visible {
+                position: fixed;
+                top: 10%;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                max-height: 70vh;
+                overflow-y: auto;
+                background: #1a1b26;
+                padding: 15px;
+                border: 2px solid #5c4d3c;
+                border-radius: 8px;
+                box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
             }
         }
     </style>
@@ -1839,7 +2104,8 @@
                 <div class="bot-area">
                     <div class="board" id="opponent-board"></div>
                 </div>
-                <div style="position: relative; display: flex; align-items: center;">
+                <div
+                    style="position: relative; display: flex; align-items: center; width: 100%; justify-content: center;">
                     <div class="board" id="player-board"></div>
                     <!-- Unit Detail Box moved out to body for fixed positioning -->
                 </div>
@@ -5989,7 +6255,7 @@
             // Mobile Navigation Control
             window.togglePanel = (panelId, btn) => {
                 const p = document.getElementById(panelId);
-                const allPanels = ['synergy-panel', 'item-guide-panel', 'inventory-container'];
+                const allPanels = ['synergy-panel', 'item-guide-panel', 'inventory-container', 'synergy-list-container'];
                 const isVis = p.classList.contains('mobile-visible');
 
                 // Hide all
@@ -6010,8 +6276,9 @@
         </script>
         <div id="mobile-nav">
             <button onclick="togglePanel('synergy-panel', this)"><i class="ra ra-scroll-unfurled"></i>軍勢</button>
+            <button onclick="togglePanel('synergy-list-container', this)"><i class="ra ra-book"></i>一覧</button>
             <button onclick="togglePanel('inventory-container', this)"><i class="ra ra-backpack"></i>荷物</button>
-            <button onclick="togglePanel('item-guide-panel', this)"><i class="ra ra-book"></i>全書</button>
+            <button onclick="togglePanel('item-guide-panel', this)"><i class="ra ra-sword"></i>全書</button>
         </div>
 
 </body>
