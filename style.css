@@ -1,0 +1,262 @@
+:root {
+    --bg-color: #1a1b26;
+    --board-bg: #24283b;
+    --accent-color: #7aa2f7;
+    --text-color: #c0caf5;
+    --gold-color: #e0af68;
+    --hp-color: #f7768e;
+    --card-bg: #414868;
+    --slot-bg: #1f2335;
+    --font-main: 'Outfit', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#app {
+    width: 100%;
+    max-width: 1280px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    position: relative;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.health-bar {
+    font-weight: bold;
+    color: var(--hp-color);
+}
+
+.gold-display {
+    color: var(--gold-color);
+    font-weight: bold;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+.game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: rotateX(0deg);
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(7, 60px);
+    grid-template-rows: repeat(4, 52px);
+    gap: 10px;
+    padding: 20px;
+    background: var(--board-bg);
+    border-radius: 12px;
+    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); removed */
+    position: relative;
+    border: 1px solid #3b4261;
+}
+
+.board.opponent-board {
+    opacity: 0.9;
+    transform: rotateX(10deg);
+    margin-bottom: 20px;
+    border-color: #f7768e;
+}
+
+.player-board {
+    transform: rotateX(10deg);
+    border-color: #7aa2f7;
+}
+
+.hex-cell {
+    width: 60px;
+    height: 60px;
+    background: var(--slot-bg);
+    border-radius: 50%;
+    border: 2px solid #565f89;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.hex-cell.highlight {
+    border-color: var(--accent-color);
+    /* box-shadow: 0 0 10px var(--accent-color); removed */
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 12px 12px 0 0;
+}
+
+.bench-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    min-height: 70px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.slot {
+    width: 60px;
+    height: 60px;
+    background: var(--slot-bg);
+    border: 2px solid #565f89;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.shop-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    height: 140px;
+}
+
+.shop-card {
+    width: 120px;
+    background: var(--card-bg);
+    border: 1px solid #7aa2f7;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    cursor: pointer;
+    transition: transform 0.1s;
+    position: relative;
+}
+
+.shop-card:hover {
+    transform: translateY(-5px);
+    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); removed */
+}
+
+.shop-card h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.shop-card .cost {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: var(--gold-color);
+    font-weight: bold;
+}
+
+.unit {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #9ece6a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    color: #1a1b26;
+    font-weight: bold;
+    cursor: grab;
+    position: relative;
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); removed */
+    z-index: 10;
+}
+
+.unit.enemy {
+    background: #f7768e;
+}
+
+.unit.dragging {
+    opacity: 0.5;
+}
+
+/* Modal */
+#modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#modal-content {
+    background: var(--bg-color);
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid var(--accent-color);
+}
+
+button {
+    background: var(--accent-color);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: var(--font-main);
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.shop-card.star-2 {
+    border: 2px solid #ffd700;
+    /* box-shadow: 0 0 10px #ffd700; removed */
+    transform: scale(1.05);
+}
